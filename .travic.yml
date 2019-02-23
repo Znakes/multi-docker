@@ -1,0 +1,23 @@
+sudp: required
+services:
+  - docker
+
+before_install:
+  - docker build -t znakes/react-test -f ./client/Dockerfile.dev ./client
+
+scripts:
+  - docker run znakes/react-test npm test --coverage
+
+after_success:
+  - docker build -t znakes/multi-client ./client
+  - docker build -t znakes/multi-nginx  ./nginx
+  - docker build -t znakes/multi-server ./server
+  - docker build -t znakes/multi-worker ./worker
+  #login to the docker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #push images
+  - docker push znakes/multi-client
+  - docker push znakes/multi-nginx
+  - docker push znakes/multi-server
+  - docker push znakes/multi-worker
+
