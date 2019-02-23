@@ -6,7 +6,7 @@ before_install:
   - docker build -t znakes/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run znakes/react-test npm test --coverage
+  - docker run znakes/react-test npm test -- --coverage
 
 after_success:
   - docker build -t znakes/multi-client ./client
