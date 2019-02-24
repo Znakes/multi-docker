@@ -5,24 +5,28 @@
       "name": "client",
       "image": "znakes/multi-client",
       "hosthame": "client",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "server",
       "image": "znakes/multi-server",
       "hosthame": "api",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "worker",
       "image": "znakes/multi-worker",
       "hosthame": "worker",
-      "essential": false
+      "essential": false,
+      "memory": 128
     },
     {
       "name": "nginx",
       "image": "znakes/multi-nginx",
       "essential": true,
+      "memory": 128,
       "portMappings": [
         {
           "hostPort": 80,
